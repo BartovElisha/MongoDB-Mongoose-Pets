@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "mongoose": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "name": "mongodb-mongoose-pets",
+  "description": "FullStack, MongoDB final Task (Mongoose) - Pets Task",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BartovElisha/MongoDB-Mongoose-Pets.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BartovElisha/MongoDB-Mongoose-Pets/issues"
+  },
+  "homepage": "https://github.com/BartovElisha/MongoDB-Mongoose-Pets#readme"
+}
