@@ -11,7 +11,8 @@ const petOwnerSchema = new mongoose.Schema({
     email: {
         type: String,
         require: true,
-        lowercase: true
+        lowercase: true,
+        unique: true
     },
     age: {
         type: Number,

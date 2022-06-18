@@ -48,12 +48,20 @@ try {
     displayPetOwner("Evelin");
     displayPetOwner("Ira");
     displayPetOwner("Max");
+
+    // Display All Pets of petOwner
+    displayPetsOfOwner("Elisha");
+    // displayPetsOfOwner("Renata");
+    // displayPetsOfOwner("Evelin");
+    // displayPetsOfOwner("Ira");
+    // displayPetsOfOwner("Max");
 }
 catch (error) {
     console.log("Error:" + error);
 }
 finally {
     console.log("Success !!!");
+    console.log("By By !!!");
 }
 
 // CRUD (Create Read Update Delete) Functions 
@@ -93,10 +101,18 @@ async function createNewPetOwner(firstName,lastName,email,age,viterenarFirstName
     newPetOwner.viterenar_id = viterenarResult[0]._id; 
 
     // Find ID of All Pets and reffer it to Pet Owner    
+    // for option:
     for(let i = 0; i < petNamesArray.length; i++) {
         const petResult = await pet.find({petName: `${petNamesArray[i]}`});
         newPetOwner.pets_id[i] = petResult[0]._id;
     }
+
+    // ForEach option: NOT WORKING !!!!!!!! Need to Fix
+    // petNamesArray.forEach(
+    //     async (element) => {
+    //         let singlePet = await pet.find({petName: `${element.petName}`});
+    //         newPetOwner.pets_id = singlePet._id;    
+    //     });
 
     let result = await newPetOwner.save();
 }
@@ -137,6 +153,28 @@ async function displayPetOwner(firstName) {
     console.log("Pet Owner Age: "+result[0].age);
     console.log("Pet Owner Viterenar_id: "+result[0].viterenar_id);
     console.log("Pet Owner Pets_id: "+result[0].pets_id);
+}
+
+async function displayPetsOfOwner(petOwnerFirstName) {
+    // find pet owner by name (find methode)
+    console.log("-----------------------------------------");
+    console.log("Pets Owner: "+petOwnerFirstName);
+    
+
+    // Find IDs of pets refferenced to Pet Owner
+    const result = await petOwner.find({firstName: `${petOwnerFirstName}`});
+    console.log(`Pets Owner ${petOwnerFirstName} has Pets IDs: ${result[0].pets_id}`);
+   
+    // find all pets of the pets owner using findById methode.
+    for(let i = 0;i < result[0].pets_id.length; i++) {
+        let singlePet = await pet.findById(result[0].pets_id[i]);
+        console.log(`Pet ${i+1}: ${singlePet.petName}`);        
+    }
+
+    // find viterenar of the pets owner using findById methode.
+    let findViterenar = await viterenar.findById(result[0].viterenar_id);
+    displayViterenar(findViterenar.firstName);
+    console.log("-----------------------------------------");
 }
 
 // Update
