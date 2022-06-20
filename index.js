@@ -49,12 +49,7 @@ try {
     displayPetOwner("Ira");
     displayPetOwner("Max");
 
-    // Display All Pets of petOwner
-    displayPetsOfOwner("Elisha");
-    // displayPetsOfOwner("Renata");
-    // displayPetsOfOwner("Evelin");
-    // displayPetsOfOwner("Ira");
-    // displayPetsOfOwner("Max");
+    dispAllPetsAndVeterenars();
 }
 catch (error) {
     console.log("Error:" + error);
@@ -106,11 +101,11 @@ async function createNewPetOwner(firstName,lastName,email,age,viterenarFirstName
         const petResult = await pet.find({petName: `${petNamesArray[i]}`});
         newPetOwner.pets_id[i] = petResult[0]._id;
     }
-
-    // ForEach option: NOT WORKING !!!!!!!! Need to Fix
+    // ForEach option NOT WORKING !!!!!
     // petNamesArray.forEach(
     //     async (element) => {
-    //         let singlePet = await pet.find({petName: `${element.petName}`});
+    //         let singlePet = await pet.find({petName: `${element}`});
+    //         console.log(singlePet[0].petName);
     //         newPetOwner.pets_id = singlePet._id;    
     //     });
 
@@ -175,6 +170,15 @@ async function displayPetsOfOwner(petOwnerFirstName) {
     let findViterenar = await viterenar.findById(result[0].viterenar_id);
     displayViterenar(findViterenar.firstName);
     console.log("-----------------------------------------");
+}
+
+async function dispAllPetsAndVeterenars () {
+    // Display All Pets and Viterenars of petOwner
+    await displayPetsOfOwner("Elisha");
+    await displayPetsOfOwner("Renata");
+    await displayPetsOfOwner("Evelin");
+    await displayPetsOfOwner("Ira");
+    await displayPetsOfOwner("Max");
 }
 
 // Update
